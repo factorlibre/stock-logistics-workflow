@@ -76,12 +76,7 @@ class StockPickingMassAction(TransientModel):
             assigned_picking_lst = picking_obj.search(
                 domain, order='scheduled_date')
             for picking in assigned_picking_lst:
-                transfer = True
                 for move in picking.move_lines:
-                    if not move.quantity_done:
-                        transfer = False
-                        break
-                if transfer:
-                    for move in picking.move_lines:
+                    if move.reserved_availability:
                         move.quantity_done = move.reserved_availability
                 picking.do_transfer()
