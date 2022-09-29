@@ -34,7 +34,7 @@ class AccountInvoice(models.Model):
         if 'invoice_line_ids' not in values or "in" not in values.get("type", ""):
             return super().create(values)
         for item in values.get('invoice_line_ids'):
-            if not item[2].get('purchase_line_id'):
+            if not item[2] or not item[2].get('purchase_line_id'):
                 continue
             moves = self._get_moves_from_po_line(item[2]['purchase_line_id'])
             item[2]['move_line_ids'] = [(6, 0, moves.ids)]
