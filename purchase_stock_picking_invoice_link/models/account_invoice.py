@@ -22,12 +22,13 @@ class AccountInvoice(models.Model):
         pickings = self.env["stock.picking"]
         if "in_" in self.type:
             for line in self.invoice_line_ids:
-                if line.purchase_line_id:
+                if line.purchase_line_id and not line.move_line_ids:
                     moves = self._get_moves_from_po_line(line.purchase_line_id.id)
                     moves = moves.filtered(lambda x: not x.invoice_line_ids)
                     line.move_line_ids = [(6, 0, moves.ids)]
                     pickings |= moves.mapped("picking_id")
-            self.picking_ids = [(6, 0, pickings.ids)]
+            if pickings:
+                self.picking_ids = [(6, 0, pickings.ids)]
 
     @api.model
     def create(self, values):
