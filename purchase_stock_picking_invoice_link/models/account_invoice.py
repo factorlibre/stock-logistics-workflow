@@ -30,6 +30,11 @@ class AccountInvoice(models.Model):
             if pickings:
                 self.picking_ids = [(6, 0, pickings.ids)]
 
+    def purchase_order_change(self):
+        res = super().purchase_order_change()
+        self.onchange_invoice_lines_get_po_moves()
+        return res
+
     @api.model
     def create(self, values):
         pickings = self.env['stock.picking']
