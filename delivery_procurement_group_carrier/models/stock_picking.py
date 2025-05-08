@@ -15,6 +15,9 @@ class StockPicking(models.Model):
                 continue
             pickings = self.browse().union(*pickings)
             carrier = pickings.carrier_id
+            if not carrier:
+                continue
+
             group.carrier_id = carrier
             domain = [
                 ("group_id", "=", group.id),
