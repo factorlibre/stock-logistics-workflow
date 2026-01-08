@@ -7,9 +7,9 @@ class StockQuantPackage(models.Model):
     _inherit = "stock.quant.package"
 
     pack_weight = fields.Float()
-    pack_length = fields.Integer(help="length")
-    width = fields.Integer("Pack Width", help="width")
-    height = fields.Integer("Pack Height", help="height")
+    pack_length = fields.Float(help="length")
+    width = fields.Float("Pack Width", help="width")
+    height = fields.Float("Pack Height", help="height")
     volume = fields.Float(
         "Pack Volume",
         digits=(8, 4),
