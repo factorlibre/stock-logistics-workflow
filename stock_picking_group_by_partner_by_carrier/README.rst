@@ -124,6 +124,8 @@ Contributors
   * Denis Roussel <denis.roussel@acsone.eu>
   * Laurent Mignon <laurent.mignon@acsone.eu>
 
+* Luis Alejandro Sandes <luisalejandro.sandes@factorlibre.com>
+
 Other credits
 ~~~~~~~~~~~~~
 
